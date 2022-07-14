@@ -71,7 +71,7 @@ const Navbar = () => {
     } else {
       document.body.style.overflowY = "auto";
     }
-  }, [changeBackground]);
+  }, [changeBackground, open]);
   return (
     <>
       <Box

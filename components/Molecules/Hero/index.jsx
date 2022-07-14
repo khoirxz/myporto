@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, chakra, Heading, Image } from "@chakra-ui/react";
+import { Box, chakra, Heading, Img } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 import CustomContainer from "../CustomContainer";
@@ -81,7 +81,7 @@ const Hero = () => {
             >
               learn more
             </chakra.span>
-            <Image verticalAlign="baseline" src="/assets/svg/arrow.svg" />
+            <Img verticalAlign="baseline" src="/assets/svg/arrow.svg" />
           </Box>
         </Box>
 

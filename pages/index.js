@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   Text,
-  Image,
   Img,
   Grid,
   GridItem,
@@ -84,21 +83,21 @@ export default function Home() {
 
             <Flex mb="38px">
               <Box mr="3">
-                <Image src="/assets/svg/indicator.svg" boxSize="40px" />
+                <Img src="/assets/svg/indicator.svg" boxSize="40px" />
               </Box>
 
               <Box>
                 <Box fontSize="16px">
                   <Text mb={5}>
-                    hello, I'm Khoir a freelancer, Fullstack developer, pixel
-                    art maker and I also have networking skills.
+                    hello, I&apos;m Khoir a freelancer, Fullstack developer,
+                    pixel art maker and I also have networking skills.
                   </Text>
 
                   <Text mb={5}>
                     I have a lot of experience on websites, and sometimes I make
                     pixel art in Aseprite. I designed using Figma then made a
-                    website using ReactJs. I'm quite used to using MonggoDB as a
-                    database and I really like Framer Motion.
+                    website using ReactJs. I&apos;m quite used to using MonggoDB
+                    as a database and I really like Framer Motion.
                   </Text>
                 </Box>
                 <Flex mt="5rem">
