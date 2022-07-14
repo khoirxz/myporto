@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Img, Text } from "@chakra-ui/react";
 import { BsGithub } from "react-icons/bs";
 
 const Card = () => {
@@ -37,7 +37,7 @@ const Card = () => {
                 more
               </Text>
 
-              <Image src="/assets/svg/link.svg" transform="translateY(3px)" />
+              <Img src="/assets/svg/link.svg" transform="translateY(3px)" />
             </Box>
           </Link>
         </Box>

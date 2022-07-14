@@ -55,15 +55,15 @@ const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
   const [open, cycleOpen] = useCycle(false, true);
 
-  const changeBackground = () => {
-    if (window.scrollY >= 80) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
-
   useEffect(() => {
+    const changeBackground = () => {
+      if (window.scrollY >= 80) {
+        setNavbar(true);
+      } else {
+        setNavbar(false);
+      }
+    };
+
     window.addEventListener("scroll", changeBackground);
 
     if (open) {
@@ -71,7 +71,8 @@ const Navbar = () => {
     } else {
       document.body.style.overflowY = "auto";
     }
-  }, [changeBackground, open]);
+  }, [open]);
+
   return (
     <>
       <Box
