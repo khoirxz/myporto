@@ -25,11 +25,11 @@ const Footer = () => {
           />
         </Box>
         <Box>
-          <Heading fontSize="64px" fontWeight="bold">
+          <Heading fontSize={{ base: "32px", md: "64px" }} fontWeight="bold">
             have any question?
           </Heading>
-          <Box mt="45px">
-            <Text fontSize="42px">
+          <Box mt={{ base: "30px", md: "45px" }}>
+            <Text fontSize={{ base: "20px", md: "42px" }}>
               <chakra.span color="blackAlpha.500" fontWeight="normal">
                 feel free to ask
               </chakra.span>{" "}

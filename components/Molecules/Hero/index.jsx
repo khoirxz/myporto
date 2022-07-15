@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, chakra, Heading, Img } from "@chakra-ui/react";
+import { Box, chakra, Heading, Img, transition } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 import CustomContainer from "../CustomContainer";
@@ -12,7 +12,7 @@ const containerBox = {
 const arrowDown = {
   visible: {
     opacity: 1,
-    y: 0,
+    x: 0,
     transition: {
       delay: 0.7,
       staggerChildren: 1.5,
@@ -20,7 +20,15 @@ const arrowDown = {
   },
   hidden: {
     opacity: 0,
-    y: 50,
+    x: -50,
+  },
+  down: {
+    y: [4, -4, 4],
+    transition: {
+      delay: 1,
+      repeat: Infinity,
+      times: [0, 0.8],
+    },
   },
 };
 
@@ -30,14 +38,17 @@ const sentence = {
     opacity: 1,
     transition: {
       delay: 1,
-      staggerChildren: 0.08,
+      staggerChildren: 0.1,
     },
   },
 };
 
 const letter = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, x: 50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+  },
 };
 
 const title = "WEB DEVELOPER";
@@ -67,9 +78,10 @@ const Hero = () => {
             display="flex"
             flexDir="column"
             alignItems="center"
+            cursor="pointer"
             variants={arrowDown}
             initial="hidden"
-            animate="visible"
+            animate={["visible", "down"]}
           >
             <chakra.span
               fontSize="12px"
@@ -98,13 +110,13 @@ const Hero = () => {
               }}
               src="/assets/svg/rectangle.svg"
               initial={{
-                opacity: [0, 0, 1],
+                opacity: 0,
               }}
-              animate={{ opacity: [0, 0, 1] }}
-              exit={{ opacity: [0, 0, 1] }}
-              transition={{
-                times: [0, 0.5, 1],
+              animate={{
+                opacity: [0, 1, 0],
+                transition: { times: [0, 1, 2, 1, 0], repeat: Infinity },
               }}
+              exit={{ opacity: 0 }}
             />
           </Box>
           <Box
@@ -127,17 +139,21 @@ const Hero = () => {
               initial={{
                 top: "50%",
                 left: "50%",
+                opacity: 0,
               }}
               animate={{
                 top: ["50%", "0%", "0%"],
                 left: ["50%", "50%", "0%"],
+                opacity: 1,
               }}
               exit={{
                 top: "0",
                 left: "0",
+                opacity: 1,
               }}
               transition={{
-                times: [0, 0.3],
+                delay: 0.5,
+                times: [0, 0.3, 0.6],
               }}
             />
             <motion.img
@@ -150,17 +166,21 @@ const Hero = () => {
               initial={{
                 bottom: "50%",
                 right: "50%",
+                opacity: 0,
               }}
               animate={{
                 bottom: ["50%", "0%", "0%"],
                 right: ["50%", "50%", "0%"],
+                opacity: 1,
               }}
               exit={{
                 bottom: "0",
                 right: "0",
+                opacity: 1,
               }}
               transition={{
-                times: [0, 0.3],
+                delay: 0.5,
+                times: [0, 0.3, 0.6],
               }}
             />
           </Box>
@@ -174,8 +194,32 @@ const Hero = () => {
             flexDir="column"
             justifyContent="center"
           >
-            <Heading fontSize="22px" color="blackAlpha.500">
-              RIZQI <chakra.span color="blackAlpha.800">KHOIR</chakra.span>
+            <Heading
+              as={motion.h2}
+              fontSize="22px"
+              color="blackAlpha.500"
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: [0, 0, 1],
+              }}
+              exit={{
+                opacity: 0,
+              }}
+            >
+              RIZQI{" "}
+              <motion.span
+                style={{
+                  color: "#999999",
+                  cursor: "pointer",
+                }}
+                whileHover={{
+                  color: "#333333",
+                }}
+              >
+                KHOIR
+              </motion.span>
               URROHMAN
             </Heading>
 

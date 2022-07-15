@@ -8,6 +8,8 @@ import {
   Grid,
   GridItem,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+import Typewriter from "typewriter-effect";
 
 import { Card, Hero } from "../components/Molecules";
 import { CustomContainer, CustomBtn } from "../components/Molecules";
@@ -57,6 +59,20 @@ const stack = [
   },
 ];
 
+const onLoad = {
+  hidden: {
+    opacity: 0,
+  },
+
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.25,
+      delay: 0.3,
+    },
+  },
+};
+
 export default function Home() {
   return (
     <>
@@ -68,14 +84,17 @@ export default function Home() {
         <Hero />
 
         <CustomContainer>
-          <Box
-            minH="100vh"
-            pt="12rem"
-            maxW="500px"
-            sx={{
+          <motion.div
+            style={{
+              minHeight: "100vh",
+              paddingTop: "12rem",
+              maxWidth: "500px",
               marginInlineStart: "auto",
               marginInlineEnd: "auto",
             }}
+            variants={onLoad}
+            initial="hidden"
+            whileInView="visible"
           >
             <Heading textAlign="center" fontSize="48px" mb="65px">
               About me
@@ -83,7 +102,17 @@ export default function Home() {
 
             <Flex mb="38px">
               <Box mr="3">
-                <Img src="/assets/svg/indicator.svg" boxSize="40px" />
+                <Img
+                  animate={{
+                    opacity: [0, 1, 0],
+                    transition: {
+                      repeat: Infinity,
+                    },
+                  }}
+                  as={motion.img}
+                  src="/assets/svg/indicator.svg"
+                  boxSize="40px"
+                />
               </Box>
 
               <Box>
@@ -105,7 +134,7 @@ export default function Home() {
                 </Flex>
               </Box>
             </Flex>
-          </Box>
+          </motion.div>
         </CustomContainer>
 
         <CustomContainer>
@@ -161,7 +190,11 @@ export default function Home() {
               marginInlineEnd: "auto",
             }}
           >
-            <Heading textAlign="center" fontSize="48px" mb="65px">
+            <Heading
+              textAlign="center"
+              fontSize="48px"
+              mb={{ base: "35px", md: "65px" }}
+            >
               Tech Stack
             </Heading>
 

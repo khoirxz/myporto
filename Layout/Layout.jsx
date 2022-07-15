@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 
-import { Footer, Navbar, Sidebar } from "../components/Atoms";
+import { Footer, Navbar } from "../components/Atoms";
 
 const Layout = ({ children, ...rest }) => {
   return (

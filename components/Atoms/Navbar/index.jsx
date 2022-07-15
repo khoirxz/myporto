@@ -184,6 +184,8 @@ const Navbar = () => {
                         <Text
                           as={motion.text}
                           variant={itemVariants}
+                          initial="hidden"
+                          animate="visible"
                           fontSize="50px"
                           fontWeight="bold"
                         >

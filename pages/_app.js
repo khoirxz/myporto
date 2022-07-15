@@ -1,5 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const theme = extendTheme({
   fonts: {
@@ -8,11 +9,35 @@ const theme = extendTheme({
   },
 });
 
-function MyApp({ Component, pageProps }) {
+const animationPage = {
+  pageInitial: {
+    opacity: 0,
+  },
+
+  pageAnimation: {
+    opacity: 1,
+  },
+
+  pageExit: {
+    opacity: 0,
+  },
+};
+
+function MyApp({ Component, pageProps, router }) {
   return (
-    <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <AnimatePresence>
+      <motion.div
+        key={router.route}
+        variants={animationPage}
+        initial="pageInitial"
+        animate="pageAnimation"
+        exit="pageExit"
+      >
+        <ChakraProvider theme={theme}>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
