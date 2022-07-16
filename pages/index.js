@@ -8,8 +8,14 @@ import {
   Grid,
   GridItem,
 } from "@chakra-ui/react";
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+  gql,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import { motion } from "framer-motion";
-import Typewriter from "typewriter-effect";
 
 import { Card, Hero } from "../components/Molecules";
 import { CustomContainer, CustomBtn } from "../components/Molecules";
@@ -73,7 +79,7 @@ const onLoad = {
   },
 };
 
-export default function Home() {
+export default function Home({ pinnedItems }) {
   return (
     <>
       <Head>
@@ -85,6 +91,7 @@ export default function Home() {
 
         <CustomContainer>
           <motion.div
+            id="about"
             style={{
               minHeight: "100vh",
               paddingTop: "12rem",
@@ -112,6 +119,10 @@ export default function Home() {
                   as={motion.img}
                   src="/assets/svg/indicator.svg"
                   boxSize="40px"
+                  sx={{
+                    minH: "12px",
+                    minW: "12px",
+                  }}
                 />
               </Box>
 
@@ -129,7 +140,10 @@ export default function Home() {
                     as a database and I really like Framer Motion.
                   </Text>
                 </Box>
-                <Flex mt="5rem">
+                <Flex
+                  mt="5rem"
+                  justifyContent={{ base: "center", md: "flex-start" }}
+                >
                   <CustomBtn primary={true}>DOWNLOAD CV</CustomBtn>
                 </Flex>
               </Box>
@@ -137,7 +151,7 @@ export default function Home() {
           </motion.div>
         </CustomContainer>
 
-        <CustomContainer>
+        <CustomContainer id="project">
           <Box
             minH="100vh"
             pt="10rem"
@@ -146,6 +160,10 @@ export default function Home() {
               marginInlineStart: "auto",
               marginInlineEnd: "auto",
             }}
+            as={motion.div}
+            variants={onLoad}
+            initial="hidden"
+            whileInView="visible"
           >
             <Heading textAlign="center" fontSize="48px" mb="65px">
               Projects
@@ -157,19 +175,22 @@ export default function Home() {
               </Text>
 
               <Box my={9}>
-                <Grid templateColumns="repeat(2, 1fr)" gap={5}>
-                  <GridItem marginX="auto">
-                    <Card />
-                  </GridItem>
-                  <GridItem marginX="auto">
-                    <Card />
-                  </GridItem>
-                  <GridItem marginX="auto">
-                    <Card />
-                  </GridItem>
-                  <GridItem marginX="auto">
-                    <Card />
-                  </GridItem>
+                <Grid
+                  templateColumns={{
+                    base: "repeat(1, 1fr)",
+                    md: "repeat(2, 1fr)",
+                  }}
+                  gap={5}
+                >
+                  {pinnedItems.map((item) => (
+                    <GridItem key={item.id} marginX="auto">
+                      <Card
+                        title={item.name}
+                        desc={item.description}
+                        link={item.url}
+                      />
+                    </GridItem>
+                  ))}
                 </Grid>
               </Box>
 
@@ -180,7 +201,7 @@ export default function Home() {
           </Box>
         </CustomContainer>
 
-        <CustomContainer>
+        <CustomContainer id="tech-stack">
           <Box
             minH="100vh"
             pt="10rem"
@@ -189,6 +210,10 @@ export default function Home() {
               marginInlineStart: "auto",
               marginInlineEnd: "auto",
             }}
+            as={motion.div}
+            variants={onLoad}
+            initial="hidden"
+            whileInView="visible"
           >
             <Heading
               textAlign="center"
@@ -198,7 +223,7 @@ export default function Home() {
               Tech Stack
             </Heading>
 
-            <Flex flexDir="column">
+            <Flex flexDir="column" pb="5rem">
               <Box maxW="500px" marginX="auto" mb="4rem">
                 <Text textAlign="center" fontSize="16px">
                   List of my favorite technologies that i use and iam pretty
@@ -206,7 +231,13 @@ export default function Home() {
                 </Text>
               </Box>
 
-              <Grid templateColumns="repeat(8, 1fr)" alignItems="center">
+              <Grid
+                templateColumns={{
+                  base: "repeat(4, 1fr)",
+                  md: "repeat(8, 1fr)",
+                }}
+                alignItems="center"
+              >
                 {stack.map((item) => (
                   <GridItem key={item.id} p={3}>
                     <Img
@@ -233,4 +264,55 @@ export default function Home() {
       </Layout>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const httpLink = createHttpLink({
+    uri: "https://api.github.com/graphql",
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    return {
+      headers: {
+        ...headers,
+        authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
+      },
+    };
+  });
+
+  const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  });
+
+  const { data } = await client.query({
+    query: gql`
+      {
+        user(login: "khoirxz") {
+          pinnedItems(first: 4) {
+            totalCount
+            edges {
+              node {
+                ... on Repository {
+                  id
+                  name
+                  url
+                  description
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+  });
+
+  const { user } = data;
+  const pinnedItems = user.pinnedItems.edges.map(({ node }) => node);
+
+  return {
+    props: {
+      pinnedItems,
+    },
+  };
 }

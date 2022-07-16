@@ -3,11 +3,12 @@ import Link from "next/link";
 import { Box, Flex, Heading, Img, Text } from "@chakra-ui/react";
 import { BsGithub } from "react-icons/bs";
 
-const Card = () => {
+const Card = ({ title, desc, link }) => {
   return (
     <Box
+      maxH="220px"
       minH="220px"
-      w="100%"
+      w="280px"
       h="100%"
       sx={{
         border: "1px solid #D9D9D9",
@@ -15,23 +16,26 @@ const Card = () => {
         borderRadius: "5px",
       }}
     >
-      <Flex flexDir="column" p={3} justifyContent="space-between" h="100%">
+      <Flex
+        flexDir="column"
+        p={3}
+        justifyContent="space-between"
+        w="100%"
+        h="100%"
+      >
         <Box>
           <Box display="flex" justifyContent="flex-end">
             <BsGithub size="26px" />
           </Box>
           <Box>
             <Heading fontSize="22px" pb="5px">
-              Quran mobile
+              {title}
             </Heading>
-            <Text fontSize="16px">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit,
-              quibusdam.
-            </Text>
+            <Text fontSize="16px">{desc}</Text>
           </Box>
         </Box>
         <Box>
-          <Link href="#">
+          <Link href={link}>
             <Box display="flex" alignItems="center">
               <Text fontSize="16px" mr={2}>
                 more

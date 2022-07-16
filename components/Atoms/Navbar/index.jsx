@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "react-scroll";
 import { Box, Button, Text } from "@chakra-ui/react";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { RiMenu4Fill, RiCloseLine } from "react-icons/ri";
@@ -8,22 +8,22 @@ const data = [
   {
     id: 1,
     name: "about",
-    link: "#about",
+    link: "about",
   },
   {
     id: 2,
     name: "project",
-    link: "#project",
+    link: "project",
   },
   {
     id: 3,
     name: "tech stack",
-    link: "#tech stack",
+    link: "tech-stack",
   },
   {
     id: 4,
     name: "contact",
-    link: "#contact",
+    link: "contact",
   },
 ];
 
@@ -109,7 +109,9 @@ const Navbar = () => {
                   fontSize: "16px",
                 }}
               >
-                <Link href={item.link}>{item.name}</Link>
+                <Link to={item.link} smooth={true}>
+                  {item.name}
+                </Link>
               </Text>
             ))}
           </Box>
@@ -178,8 +180,6 @@ const Navbar = () => {
                         key={id}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 1.1 }}
-                        href={link}
-                        onClick={cycleOpen}
                       >
                         <Text
                           as={motion.text}
@@ -189,7 +189,9 @@ const Navbar = () => {
                           fontSize="50px"
                           fontWeight="bold"
                         >
-                          {name}
+                          <Link onClick={cycleOpen} to={link}>
+                            {name}
+                          </Link>
                         </Text>
                       </motion.a>
                     ))}

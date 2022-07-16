@@ -5,6 +5,7 @@ import { RiFacebookFill, RiInstagramFill } from "react-icons/ri";
 const Footer = () => {
   return (
     <Box
+      id="contact"
       minH="5vh"
       sx={{
         borderTop: "1px solid #BDBDBD",
