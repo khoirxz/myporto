@@ -8,6 +8,7 @@ import {
   Grid,
   GridItem,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import {
   ApolloClient,
   createHttpLink,
@@ -195,7 +196,9 @@ export default function Home({ pinnedItems }) {
               </Box>
 
               <Flex mt="4rem" justifyContent="center">
-                <CustomBtn primary={true}>view more</CustomBtn>
+                <CustomBtn primary={true}>
+                  <Link href="https://github.com/khoirxz">view more</Link>
+                </CustomBtn>
               </Flex>
             </Flex>
           </Box>

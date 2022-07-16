@@ -1,7 +1,22 @@
 import React from "react";
 import Link from "next/link";
 import { Box, Flex, Heading, Img, Text } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { BsGithub } from "react-icons/bs";
+
+const linkProject = {
+  visible: {
+    opacity: 1,
+  },
+
+  hidden: {
+    opacity: 0,
+  },
+
+  onHover: {
+    x: 10,
+  },
+};
 
 const Card = ({ title, desc, link }) => {
   return (
@@ -36,7 +51,16 @@ const Card = ({ title, desc, link }) => {
         </Box>
         <Box>
           <Link href={link}>
-            <Box display="flex" alignItems="center">
+            <Box
+              as={motion.div}
+              display="flex"
+              alignItems="center"
+              cursor="pointer"
+              variants={linkProject}
+              animate="visible"
+              initial="hidden"
+              whileHover="onHover"
+            >
               <Text fontSize="16px" mr={2}>
                 more
               </Text>

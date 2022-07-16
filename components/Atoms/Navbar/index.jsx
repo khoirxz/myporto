@@ -107,6 +107,7 @@ const Navbar = () => {
                 sx={{
                   textTransform: "UPPERCASE",
                   fontSize: "16px",
+                  cursor: "pointer",
                 }}
               >
                 <Link to={item.link} smooth={true}>
@@ -188,6 +189,7 @@ const Navbar = () => {
                           animate="visible"
                           fontSize="50px"
                           fontWeight="bold"
+                          cursor="pointer"
                         >
                           <Link onClick={cycleOpen} to={link}>
                             {name}
