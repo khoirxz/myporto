@@ -17,6 +17,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { AnimatePresence, motion } from "framer-motion";
+import Router from "next/router";
 
 import { Card, Hero } from "../components/Molecules";
 import { CustomContainer, CustomBtn } from "../components/Molecules";
@@ -169,7 +170,14 @@ export default function Home({ pinnedItems }) {
                   mt="5rem"
                   justifyContent={{ base: "center", md: "flex-start" }}
                 >
-                  <CustomBtn primary={true}>DOWNLOAD CV</CustomBtn>
+                  <CustomBtn
+                    primary={true}
+                    onClick={() => {
+                      Router.push("/resume.pdf");
+                    }}
+                  >
+                    DOWNLOAD CV
+                  </CustomBtn>
                 </Flex>
               </Box>
             </Flex>
