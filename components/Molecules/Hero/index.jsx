@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, chakra, Heading, Img, transition } from "@chakra-ui/react";
+import { Box, chakra, Heading, Img } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 import CustomContainer from "../CustomContainer";

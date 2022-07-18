@@ -48,7 +48,7 @@ const Card = ({ title, desc, link }) => {
             <Text fontSize="16px">{desc}</Text>
           </Box>
         </Box>
-        <Box>
+        <Box display="flex">
           <Link href={link}>
             <Box
               as={motion.div}

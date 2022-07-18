@@ -16,7 +16,7 @@ import {
   gql,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { Card, Hero } from "../components/Molecules";
 import { CustomContainer, CustomBtn } from "../components/Molecules";
@@ -80,11 +80,35 @@ const onLoad = {
   },
 };
 
+const cardLoad = {
+  closed: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: -1,
+    },
+  },
+  open: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: 1,
+    },
+  },
+};
+
+const itemVariants = {
+  closed: {
+    opacity: 0,
+  },
+  open: { opacity: 1 },
+};
+
 export default function Home({ pinnedItems }) {
   return (
     <>
       <Head>
         <title>Rizqi K - Portofolio</title>
+        <meta name="title" content="Rizqi Khoirurrohman - Portofolio" />
+        <meta name="description" content="Fullstack Developer, Linux " />
       </Head>
 
       <Layout>
@@ -175,25 +199,38 @@ export default function Home({ pinnedItems }) {
                 List project from github
               </Text>
 
-              <Box my={9}>
-                <Grid
-                  templateColumns={{
-                    base: "repeat(1, 1fr)",
-                    md: "repeat(2, 1fr)",
-                  }}
-                  gap={5}
-                >
-                  {pinnedItems.map((item) => (
-                    <GridItem key={item.id} marginX="auto">
-                      <Card
-                        title={item.name}
-                        desc={item.description}
-                        link={item.url}
-                      />
-                    </GridItem>
-                  ))}
-                </Grid>
-              </Box>
+              <AnimatePresence>
+                <Box my={9}>
+                  <Grid
+                    as={motion.div}
+                    templateColumns={{
+                      base: "repeat(1, 1fr)",
+                      md: "repeat(2, 1fr)",
+                    }}
+                    gap={5}
+                    variants={cardLoad}
+                    initial="closed"
+                    animate="open"
+                  >
+                    {pinnedItems.map((item) => (
+                      <GridItem
+                        key={item.id}
+                        marginX="auto"
+                        as={motion.div}
+                        variants={itemVariants}
+                        initial="closed"
+                        animate="open"
+                      >
+                        <Card
+                          title={item.name}
+                          desc={item.description}
+                          link={item.url}
+                        />
+                      </GridItem>
+                    ))}
+                  </Grid>
+                </Box>
+              </AnimatePresence>
 
               <Flex mt="4rem" justifyContent="center">
                 <CustomBtn primary={true}>
