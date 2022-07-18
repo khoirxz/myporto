@@ -244,6 +244,7 @@ export default function Home({ pinnedItems }) {
                 {stack.map((item) => (
                   <GridItem key={item.id} p={3}>
                     <Img
+                      as={motion.img}
                       src={item.imgIrl}
                       alt={item.name}
                       sx={{
@@ -251,10 +252,12 @@ export default function Home({ pinnedItems }) {
                         width: "100%",
                         display: "block",
                         height: "auto",
-                        filter: "grayscale(100%)",
                         cursor: "pointer",
                       }}
-                      _hover={{
+                      initial={{
+                        filter: "grayscale(100%)",
+                      }}
+                      whileHover={{
                         filter: "grayscale(0%)",
                       }}
                     />

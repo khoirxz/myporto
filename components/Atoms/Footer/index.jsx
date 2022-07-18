@@ -30,7 +30,7 @@ const Footer = () => {
             have any question?
           </Heading>
           <Box mt={{ base: "30px", md: "45px" }}>
-            <Text fontSize={{ base: "20px", md: "42px" }}>
+            <Text fontSize={{ base: "18px", md: "42px" }} px={3}>
               <chakra.span color="blackAlpha.500" fontWeight="normal">
                 feel free to ask
               </chakra.span>{" "}
@@ -61,7 +61,7 @@ const Footer = () => {
         margin="auto"
         justifyContent="space-between"
         py={5}
-        fontSize="14px"
+        fontSize={{ base: "10px", md: "14px" }}
       >
         <Box>Copyright 2022 Rizqi K</Box>
         <Box>

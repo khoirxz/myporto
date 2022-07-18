@@ -21,9 +21,8 @@ const linkProject = {
 const Card = ({ title, desc, link }) => {
   return (
     <Box
-      maxH="220px"
       minH="220px"
-      w="280px"
+      w={{ base: "250px", md: "280px" }}
       h="100%"
       sx={{
         border: "1px solid #D9D9D9",
