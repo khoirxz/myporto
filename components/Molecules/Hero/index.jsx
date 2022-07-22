@@ -193,7 +193,7 @@ const Hero = () => {
             zIndex="2"
             flexDir="column"
             justifyContent="center"
-            textAlign={{ base: "center", md: "left" }}
+            textAlign="center"
           >
             <Heading
               as={motion.h2}
