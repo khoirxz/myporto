@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-scroll";
-import { Box, Button, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
+import Router from "next/router";
+import { Box, Flex, Heading, Button, Link, Text } from "@chakra-ui/react";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
-import { RiMenu4Fill, RiCloseLine } from "react-icons/ri";
+import { HiMenu, HiOutlineX } from "react-icons/hi";
 
 const data = [
   {
     id: 1,
-    name: "about",
+    name: "About",
     link: "about",
   },
   {
     id: 2,
-    name: "project",
+    name: "Project",
     link: "project",
   },
   {
     id: 3,
-    name: "tech stack",
+    name: "Tech stack",
     link: "tech-stack",
   },
   {
     id: 4,
-    name: "contact",
+    name: "Contact",
     link: "contact",
   },
 ];
@@ -37,6 +37,7 @@ const itemVariants = {
 const sideVariants = {
   hidden: {
     opacity: 0,
+    width: 0,
     transition: {
       staggerChildren: 0.5,
       staggerDirection: -1,
@@ -44,6 +45,7 @@ const sideVariants = {
   },
   visible: {
     opacity: 1,
+    width: "100%",
     transition: {
       staggerChildren: 0.5,
       staggerDirection: 1,
@@ -52,20 +54,9 @@ const sideVariants = {
 };
 
 const Navbar = () => {
-  const [navbar, setNavbar] = useState(false);
   const [open, cycleOpen] = useCycle(false, true);
 
   useEffect(() => {
-    const changeBackground = () => {
-      if (window.scrollY >= 80) {
-        setNavbar(true);
-      } else {
-        setNavbar(false);
-      }
-    };
-
-    window.addEventListener("scroll", changeBackground);
-
     if (open) {
       document.body.style.overflowY = "hidden";
     } else {
@@ -74,137 +65,95 @@ const Navbar = () => {
   }, [open]);
 
   return (
-    <>
-      <Box
-        as="nav"
-        sx={{
-          position: "fixed",
-          width: "full",
-          zIndex: "4",
-
-          backdropFilter: navbar ? "saturate(180%) blur(10px)" : "none",
-        }}
+    <Box as="nav" position="relative">
+      <Flex
+        maxW="1420px"
+        margin="auto"
+        width="65%"
+        py="4"
+        alignItems="center"
+        justifyContent="space-between"
       >
-        <Box
-          display="flex"
-          maxW="1440px"
-          my={5}
-          marginInlineStart="auto"
-          marginInlineEnd="auto"
-        >
-          <Box
-            display={{ base: "none", md: "flex" }}
-            width="76%"
-            margin="auto"
-            flexDir="row"
-            justifyContent="center"
-            alignContent="center"
+        <Box>
+          <Heading
+            fontFamily="'Inter', sans-serif"
+            fontSize="22px"
+            cursor="pointer"
+            onClick={() => Router.push("/")}
           >
-            {data.map((item) => (
-              <Text
-                key={item.id}
-                mx={5}
-                sx={{
-                  textTransform: "UPPERCASE",
-                  fontSize: "16px",
-                  cursor: "pointer",
-                }}
-              >
-                <Link to={item.link} smooth={true}>
-                  {item.name}
-                </Link>
-              </Text>
-            ))}
-          </Box>
+            R KHOIR
+          </Heading>
+        </Box>
 
+        <Box position="relative" zIndex="99">
+          <Button bgColor="white" onClick={cycleOpen}>
+            {open ? <HiOutlineX size="28" /> : <HiMenu size="28" />}
+          </Button>
+        </Box>
+      </Flex>
+      <AnimatePresence>
+        {open && (
           <Box
-            display={{ base: "flex", md: "none" }}
-            width="90%"
-            margin="auto"
-            justifyContent="flex-end"
-            position="relative"
+            as={motion.div}
+            position="fixed"
+            overflow="hidden"
+            h="100vh"
+            w="100%"
+            bg="black"
+            zIndex="9"
+            top="0"
+            left="0"
+            bgColor="black"
+            variants={sideVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
           >
-            <Button
+            <Box
+              as={motion.div}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={sideVariants}
               sx={{
-                backgroundColor: "transparent",
+                display: "flex",
+                flexDir: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+                color: "white",
               }}
-              _hover={{
-                backgroundColor: "#transparent",
-                boxShadow: "xl",
-              }}
-              position="relative"
-              zIndex="98"
-              onClick={cycleOpen}
             >
-              {open ? (
-                <RiCloseLine color="#fff" size="22px" />
-              ) : (
-                <RiMenu4Fill size="22px" />
-              )}
-            </Button>
-
-            <AnimatePresence>
-              {open && (
-                <Box
-                  as={motion.aside}
-                  position="fixed"
-                  overflow="hidden"
-                  h="100vh"
-                  bg="black"
-                  zIndex="-1"
-                  top="0"
-                  left="0"
-                  initial={{ width: "0" }}
-                  animate={{ width: "100%" }}
-                  exit={{
-                    width: "0",
-                    transition: { delay: 0.3, duration: 0.3 },
-                  }}
+              {data.map(({ name, id, link }) => (
+                <motion.a
+                  key={id}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 1.1 }}
                 >
-                  <Box
-                    as={motion.div}
+                  <Text
+                    as={motion.text}
+                    variant={itemVariants}
                     initial="hidden"
                     animate="visible"
-                    exit="hidden"
-                    variants={sideVariants}
-                    sx={{
-                      display: "flex",
-                      flexDir: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: "100vh",
-                      color: "white",
-                    }}
+                    fontSize="50px"
+                    fontWeight="bold"
+                    cursor="pointer"
                   >
-                    {data.map(({ name, id, link }) => (
-                      <motion.a
-                        key={id}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 1.1 }}
-                      >
-                        <Text
-                          as={motion.text}
-                          variant={itemVariants}
-                          initial="hidden"
-                          animate="visible"
-                          fontSize="50px"
-                          fontWeight="bold"
-                          cursor="pointer"
-                        >
-                          <Link onClick={cycleOpen} to={link}>
-                            {name}
-                          </Link>
-                        </Text>
-                      </motion.a>
-                    ))}
-                  </Box>
-                </Box>
-              )}
-            </AnimatePresence>
+                    <Link
+                      onClick={cycleOpen}
+                      to={link}
+                      _hover={{ textDecor: "none" }}
+                    >
+                      {name}
+                    </Link>
+                  </Text>
+                </motion.a>
+              ))}
+            </Box>
           </Box>
-        </Box>
-      </Box>
-    </>
+        )}
+      </AnimatePresence>
+    </Box>
   );
 };
 

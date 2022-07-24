@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 
 const CustomContainer = ({ children, ...rest }) => {
   return (
-    <Box maxW="1440px" width="76%" margin="auto" {...rest}>
+    <Box maxW="1420px" margin="auto" width="65%" {...rest}>
       {children}
     </Box>
   );

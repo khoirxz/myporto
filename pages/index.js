@@ -1,14 +1,18 @@
+import React from "react";
 import Head from "next/head";
+import NextLink from "next/link";
+import Router from "next/router";
 import {
-  Box,
-  Flex,
   Heading,
+  Box,
   Text,
+  Link,
   Img,
+  Flex,
+  Button,
   Grid,
   GridItem,
 } from "@chakra-ui/react";
-import Link from "next/link";
 import {
   ApolloClient,
   createHttpLink,
@@ -16,13 +20,9 @@ import {
   gql,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { AnimatePresence, motion } from "framer-motion";
-import Router from "next/router";
-
-import { Card, Hero } from "../components/Molecules";
-import { CustomContainer, CustomBtn } from "../components/Molecules";
 
 import Layout from "../Layout/Layout";
+import { CustomContainer, ListItem } from "../components/Molecules";
 
 const stack = [
   {
@@ -67,43 +67,7 @@ const stack = [
   },
 ];
 
-const onLoad = {
-  hidden: {
-    opacity: 0,
-  },
-
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.25,
-      delay: 0.3,
-    },
-  },
-};
-
-const cardLoad = {
-  closed: {
-    transition: {
-      staggerChildren: 0.2,
-      staggerDirection: -1,
-    },
-  },
-  open: {
-    transition: {
-      staggerChildren: 0.2,
-      staggerDirection: 1,
-    },
-  },
-};
-
-const itemVariants = {
-  closed: {
-    opacity: 0,
-  },
-  open: { opacity: 1 },
-};
-
-export default function Home({ pinnedItems }) {
+const Home = ({ pinnedItems }) => {
   return (
     <>
       <Head>
@@ -111,175 +75,114 @@ export default function Home({ pinnedItems }) {
         <meta name="title" content="Rizqi Khoirurrohman - Portofolio" />
         <meta name="description" content="Fullstack Developer, Linux " />
       </Head>
-
       <Layout>
-        <Hero />
-
         <CustomContainer>
-          <motion.div
-            id="about"
-            style={{
-              minHeight: "100vh",
-              paddingTop: "12rem",
-              maxWidth: "500px",
-              marginInlineStart: "auto",
-              marginInlineEnd: "auto",
-            }}
-            variants={onLoad}
-            initial="hidden"
-            whileInView="visible"
-          >
-            <Heading textAlign="center" fontSize="48px" mb="65px">
-              About me
-            </Heading>
-
-            <Flex mb="38px">
-              <Box mr="3">
-                <Img
-                  animate={{
-                    opacity: [0, 1, 0],
-                    transition: {
-                      repeat: Infinity,
-                    },
-                  }}
-                  as={motion.img}
-                  src="/assets/svg/indicator.svg"
-                  boxSize="40px"
-                  sx={{
-                    minH: "12px",
-                    minW: "12px",
-                  }}
-                />
-              </Box>
-
-              <Box>
-                <Box fontSize="16px">
-                  <Text mb={5}>
-                    hello, I&apos;m Khoir a freelancer, Fullstack developer,
-                    pixel art maker and I also have networking skills.
+          <Box minH="100vh" display="flex" alignItems="center" width="100%">
+            <Box
+              py="5"
+              display="flex"
+              justifyContent="space-between"
+              width="100%"
+            >
+              <Box w="550px">
+                <Heading mb={5}>About</Heading>
+                <Box>
+                  <Text color="blackAlpha.600" mb={3}>
+                    Hello, I'm Khoir a freelancer, fullstack developer, pixel
+                    art maker and I also have networking skills.
                   </Text>
-
-                  <Text mb={5}>
+                  <Text color="blackAlpha.600">
                     I have a lot of experience on websites, and sometimes I make
                     pixel art in Aseprite. I designed using Figma then made a
-                    website using ReactJs. I&apos;m quite used to using MonggoDB
-                    as a database and I really like Framer Motion.
+                    website using ReactJs. I'm quite used to using MonggoDB as a
+                    database and I really like Framer Motion.
                   </Text>
                 </Box>
-                <Flex
-                  mt="5rem"
-                  justifyContent={{ base: "center", md: "flex-start" }}
-                >
-                  <CustomBtn
-                    primary={true}
+
+                <Box pt="2rem">
+                  <Link
+                    color="blue.500"
+                    _hover={{
+                      textDecoration: "none",
+                    }}
                     onClick={() => {
                       Router.push("/resume.pdf");
                     }}
                   >
-                    DOWNLOAD CV
-                  </CustomBtn>
-                </Flex>
-              </Box>
-            </Flex>
-          </motion.div>
-        </CustomContainer>
-
-        <CustomContainer id="project">
-          <Box
-            minH="100vh"
-            pt="10rem"
-            maxW="600px"
-            sx={{
-              marginInlineStart: "auto",
-              marginInlineEnd: "auto",
-            }}
-            as={motion.div}
-            variants={onLoad}
-            initial="hidden"
-            whileInView="visible"
-          >
-            <Heading textAlign="center" fontSize="48px" mb="65px">
-              Projects
-            </Heading>
-
-            <Flex flexDir="column">
-              <Text textAlign="center" fontSize="16px">
-                List project from github
-              </Text>
-
-              <AnimatePresence>
-                <Box my={9}>
-                  <Grid
-                    as={motion.div}
-                    templateColumns={{
-                      base: "repeat(1, 1fr)",
-                      md: "repeat(2, 1fr)",
-                    }}
-                    gap={5}
-                    variants={cardLoad}
-                    initial="closed"
-                    animate="open"
-                  >
-                    {pinnedItems.map((item) => (
-                      <GridItem
-                        key={item.id}
-                        marginX="auto"
-                        as={motion.div}
-                        variants={itemVariants}
-                        initial="closed"
-                        animate="open"
-                      >
-                        <Card
-                          title={item.name}
-                          desc={item.description}
-                          link={item.url}
-                        />
-                      </GridItem>
-                    ))}
-                  </Grid>
+                    Download CV
+                  </Link>
                 </Box>
-              </AnimatePresence>
-
-              <Flex mt="4rem" justifyContent="center">
-                <CustomBtn primary={true}>
-                  <Link href="https://github.com/khoirxz">view more</Link>
-                </CustomBtn>
-              </Flex>
-            </Flex>
+              </Box>
+              <Box>
+                <Img
+                  maxW="500px"
+                  src="/assets/svg/illustation-about.svg"
+                  alt="About me"
+                />
+              </Box>
+            </Box>
           </Box>
         </CustomContainer>
+        <CustomContainer>
+          <Box minH="100vh">
+            <Box>
+              <Heading mb="15px">Projects</Heading>
+              <Text color="blackAlpha.600">List project from github</Text>
+            </Box>
 
-        <CustomContainer id="tech-stack">
+            <Box my="4rem">
+              <Flex flexDir="column">
+                {pinnedItems.map((item) => (
+                  <Box key={item.id}>
+                    <ListItem
+                      title={item.name}
+                      desc={item.description}
+                      link={item.url}
+                    />
+                  </Box>
+                ))}
+              </Flex>
+            </Box>
+
+            <Box display="flex" justifyContent="center">
+              <Button
+                sx={{
+                  borderWidth: "3px",
+                  borderColor: "#3C4043",
+                  borderStyle: "solid",
+                  bgColor: "white",
+                }}
+                _hover={{
+                  bgColor: "#3C4043",
+                  color: "white",
+                }}
+              >
+                <NextLink href="https://github.com/khoirxz?tab=repositories">
+                  view more
+                </NextLink>
+              </Button>
+            </Box>
+          </Box>
+        </CustomContainer>
+        <CustomContainer>
           <Box
-            minH="100vh"
-            pt="10rem"
-            maxW="700px"
-            sx={{
-              marginInlineStart: "auto",
-              marginInlineEnd: "auto",
-            }}
-            as={motion.div}
-            variants={onLoad}
-            initial="hidden"
-            whileInView="visible"
+            minH="90vh"
+            display="flex"
+            flexDir="column"
+            alignItems="center"
+            justifyContent="center"
           >
-            <Heading
-              textAlign="center"
-              fontSize="48px"
-              mb={{ base: "35px", md: "65px" }}
-            >
-              Tech Stack
-            </Heading>
+            <Box textAlign="center">
+              <Heading mb="15px">Tech Stack</Heading>
+              <Text color="blackAlpha.600">
+                List of my favorite technologies that i use and iam pretty
+                confident using that.
+              </Text>
+            </Box>
 
-            <Flex flexDir="column" pb="5rem">
-              <Box maxW="500px" marginX="auto" mb="4rem">
-                <Text textAlign="center" fontSize="16px">
-                  List of my favorite technologies that i use and iam pretty
-                  confident using that.
-                </Text>
-              </Box>
-
+            <Box maxW="70%" marginX="auto">
               <Grid
+                mt="3rem"
                 templateColumns={{
                   base: "repeat(4, 1fr)",
                   md: "repeat(8, 1fr)",
@@ -289,7 +192,6 @@ export default function Home({ pinnedItems }) {
                 {stack.map((item) => (
                   <GridItem key={item.id} p={3}>
                     <Img
-                      as={motion.img}
                       src={item.imgIrl}
                       alt={item.name}
                       sx={{
@@ -299,23 +201,17 @@ export default function Home({ pinnedItems }) {
                         height: "auto",
                         cursor: "pointer",
                       }}
-                      initial={{
-                        filter: "grayscale(100%)",
-                      }}
-                      whileHover={{
-                        filter: "grayscale(0%)",
-                      }}
                     />
                   </GridItem>
                 ))}
               </Grid>
-            </Flex>
+            </Box>
           </Box>
         </CustomContainer>
       </Layout>
     </>
   );
-}
+};
 
 export async function getStaticProps() {
   const httpLink = createHttpLink({
@@ -367,3 +263,5 @@ export async function getStaticProps() {
     },
   };
 }
+
+export default Home;

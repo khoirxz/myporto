@@ -1,75 +1,57 @@
 import React from "react";
-import { Box, chakra, Flex, Heading, Link, Img, Text } from "@chakra-ui/react";
-import { RiFacebookFill, RiInstagramFill } from "react-icons/ri";
+import NextLink from "next/link";
+import { Box, Flex, Heading, Link, chakra } from "@chakra-ui/react";
+import { FaHeart, FaFacebook, FaGithub, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <Box
-      id="contact"
-      minH="5vh"
-      sx={{
-        borderTop: "1px solid #BDBDBD",
-        backgroundColor: "#EAEAEA",
-      }}
-    >
-      <Box textAlign="center" my="5rem">
-        <Box>
-          <Img
-            src="/assets/png/toad-export.png"
-            alt="profile"
-            boxSize="80px"
-            sx={{
-              display: "block",
-              marginInlineStart: "auto",
-              marginInlineEnd: "auto",
-            }}
-          />
-        </Box>
-        <Box>
-          <Heading fontSize={{ base: "32px", md: "64px" }} fontWeight="bold">
-            have any question?
-          </Heading>
-          <Box mt={{ base: "30px", md: "45px" }}>
-            <Text fontSize={{ base: "18px", md: "42px" }} px={3}>
-              <chakra.span color="blackAlpha.500" fontWeight="normal">
-                feel free to ask
-              </chakra.span>{" "}
-              <chakra.span cursor="pointer" fontWeight="bold">
-                <Link href="mailto:khoirrurrohman@gmail.com">
-                  khoirrurrohman@gmail.com
-                </Link>
-              </chakra.span>
-            </Text>
-          </Box>
-        </Box>
-
-        <Box display="flex" justifyContent="center" mt="5">
-          <Box mx={4}>
-            <Link href="https://fb.com/rootbackdor">
-              <RiFacebookFill size="36" />
-            </Link>
-          </Box>
-          <Box mx={4}>
-            <Link href="https://www.instagram.com/rizqi.khoir/">
-              <RiInstagramFill size="36" />
+    <>
+      <Box maxW="1420px" margin="auto" width="65%">
+        <Box mt={8} mb="7rem">
+          <Heading fontSize="36px">Get in touch</Heading>
+          <Box>
+            <Link
+              fontSize="36px"
+              fontWeight="semibold"
+              color="blue.500"
+              _hover={{
+                textDecoration: "none",
+              }}
+              href="mailto:khoirrurrohman@gmail.com"
+            >
+              khoirrurrohman@gmail.com
             </Link>
           </Box>
         </Box>
       </Box>
-      <Flex
-        width="80%"
-        margin="auto"
-        justifyContent="space-between"
-        py={5}
-        fontSize={{ base: "10px", md: "14px" }}
-      >
-        <Box>Copyright 2022 Rizqi K</Box>
-        <Box>
-          Made with <chakra.span fontWeight="bold">NextJs</chakra.span> and{" "}
-          <chakra.span fontWeight="bold">ChakraUI</chakra.span>
-        </Box>
-      </Flex>
-    </Box>
+      <Box as="footer" maxW="1420px" margin="auto" width="65%" my={5}>
+        <Flex justifyContent="space-between" alignItems="center">
+          <Box display="flex" alignItems="center">
+            <chakra.span mr={2}>Made with</chakra.span>
+            <FaHeart color="#EA4335" /> <chakra.span ml={2}>Rizqi</chakra.span>
+          </Box>
+          <Box>
+            <Flex mt={3}>
+              <NextLink href="https://facebook.com/rootbackdor" passHref>
+                <Link mx={2}>
+                  <FaFacebook size="26" />
+                </Link>
+              </NextLink>
+              <NextLink href="https://github.com/khoirxz" passHref>
+                <Link mx={2}>
+                  <FaGithub size="26" />
+                </Link>
+              </NextLink>
+              <NextLink href="https://facebook.com/rizqi.khoir" passHref>
+                <Link mx={2}>
+                  <FaInstagram size="26" />
+                </Link>
+              </NextLink>
+            </Flex>
+          </Box>
+        </Flex>
+      </Box>
+    </>
   );
 };
 
