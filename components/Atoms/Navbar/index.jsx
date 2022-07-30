@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Router from "next/router";
-import { Box, Flex, Heading, Button, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, Text } from "@chakra-ui/react";
+import { Link } from "react-scroll";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { HiMenu, HiOutlineX } from "react-icons/hi";
 
@@ -97,7 +98,7 @@ const Navbar = () => {
             as={motion.div}
             position="fixed"
             overflow="hidden"
-            h="100vh"
+            h="100%"
             w="100%"
             bg="black"
             zIndex="9"

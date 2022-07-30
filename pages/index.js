@@ -76,7 +76,7 @@ const Home = ({ pinnedItems }) => {
         <meta name="description" content="Fullstack Developer, Linux " />
       </Head>
       <Layout>
-        <CustomContainer>
+        <CustomContainer id="about">
           <Box minH="100vh" display="flex" alignItems="center" width="100%">
             <Box
               py="5"
@@ -86,16 +86,16 @@ const Home = ({ pinnedItems }) => {
             >
               <Box w="550px">
                 <Heading mb={5}>About</Heading>
-                <Box>
+                <Box pr={{ base: "0", md: "2rem" }}>
                   <Text color="blackAlpha.600" mb={3}>
-                    Hello, I'm Khoir a freelancer, fullstack developer, pixel
-                    art maker and I also have networking skills.
+                    Hello, I&apos;m Khoir a freelancer, fullstack developer,
+                    pixel art maker and I also have networking skills.
                   </Text>
                   <Text color="blackAlpha.600">
                     I have a lot of experience on websites, and sometimes I make
                     pixel art in Aseprite. I designed using Figma then made a
-                    website using ReactJs. I'm quite used to using MonggoDB as a
-                    database and I really like Framer Motion.
+                    website using ReactJs. I&apos;m quite used to using MonggoDB
+                    as a database and I really like Framer Motion.
                   </Text>
                 </Box>
 
@@ -113,9 +113,9 @@ const Home = ({ pinnedItems }) => {
                   </Link>
                 </Box>
               </Box>
-              <Box>
+              <Box display={{ base: "none", md: "flex" }}>
                 <Img
-                  maxW="500px"
+                  maxW={{ md: "200px", xl: "500px" }}
                   src="/assets/svg/illustation-about.svg"
                   alt="About me"
                 />
@@ -123,7 +123,7 @@ const Home = ({ pinnedItems }) => {
             </Box>
           </Box>
         </CustomContainer>
-        <CustomContainer>
+        <CustomContainer id="project">
           <Box minH="100vh">
             <Box>
               <Heading mb="15px">Projects</Heading>
@@ -164,7 +164,7 @@ const Home = ({ pinnedItems }) => {
             </Box>
           </Box>
         </CustomContainer>
-        <CustomContainer>
+        <CustomContainer id="tech-stack">
           <Box
             minH="90vh"
             display="flex"

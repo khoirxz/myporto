@@ -6,12 +6,12 @@ import { FaHeart, FaFacebook, FaGithub, FaInstagram } from "react-icons/fa";
 const Footer = () => {
   return (
     <>
-      <Box maxW="1420px" margin="auto" width="65%">
+      <Box maxW="1420px" margin="auto" width="65%" as="footer" id="contact">
         <Box mt={8} mb="7rem">
           <Heading fontSize="36px">Get in touch</Heading>
           <Box>
             <Link
-              fontSize="36px"
+              fontSize={{ base: "20px", md: "36px" }}
               fontWeight="semibold"
               color="blue.500"
               _hover={{

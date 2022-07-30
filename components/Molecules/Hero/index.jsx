@@ -14,18 +14,23 @@ const Hero = () => {
         flexDir="row"
         alignItems="center"
       >
-        <Flex justifyContent="space-between" alignContent="center" w="full">
+        <Flex
+          flexDir={{ base: "column", md: "row" }}
+          justifyContent="space-between"
+          alignContent="center"
+          w="full"
+        >
           <Box>
             <Box>
               <Heading
-                fontSize="7xl"
+                fontSize={{ base: "5xl", md: "3xl", xl: "7xl" }}
                 fontWeight="semibold"
                 fontFamily="'Inter', sans-serif"
               >
                 FULL STACK
               </Heading>
               <Heading
-                fontSize="7xl"
+                fontSize={{ base: "5xl", md: "3xl", xl: "7xl" }}
                 fontWeight="semibold"
                 fontFamily="'Inter', sans-serif"
               >
@@ -50,7 +55,7 @@ const Hero = () => {
               </NextLink>
             </Flex>
           </Box>
-          <Box display="flex">
+          <Box display={{ base: "none", md: "flex" }}>
             <Img
               display="block"
               marginX="auto"
