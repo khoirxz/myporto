@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Router from "next/router";
-import { Box, Flex, Heading, Button, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, Text, chakra } from "@chakra-ui/react";
 import { Link } from "react-scroll";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { HiMenu, HiOutlineX } from "react-icons/hi";
@@ -56,42 +56,62 @@ const sideVariants = {
 
 const Navbar = () => {
   const [open, cycleOpen] = useCycle(false, true);
+  const [navbar, setNavbar] = useState(false);
 
   useEffect(() => {
+    const changeBgNavbar = () => {
+      if (window.screenY >= 80) {
+        setNavbar(true);
+      } else {
+        setNavbar(false);
+      }
+    };
+
+    window.addEventListener("scroll", changeBgNavbar);
+
     if (open) {
       document.body.style.overflowY = "hidden";
     } else {
       document.body.style.overflowY = "auto";
     }
-  }, [open]);
+  }, [open, setNavbar]);
 
   return (
-    <Box as="nav" position="relative">
-      <Flex
-        maxW="1420px"
-        margin="auto"
-        width="65%"
+    <Box as="nav" position="relative" maxW="1420px" zIndex={9}>
+      <Box
         py="4"
-        alignItems="center"
-        justifyContent="space-between"
+        width="100%"
+        position="fixed"
+        left="50%"
+        transform="translate(-50%)"
+        zIndex={9}
       >
-        <Box>
-          <Heading
-            fontFamily="'Inter', sans-serif"
-            fontSize="22px"
-            cursor="pointer"
-            onClick={() => Router.push("/")}
-          >
-            R KHOIR
-          </Heading>
-        </Box>
+        <Flex
+          position="relative"
+          alignItems="center"
+          justifyContent="space-between"
+          width={{ base: "80%", md: "65%" }}
+          margin="auto"
+        >
+          <Box>
+            <Heading
+              fontFamily="'Inter', sans-serif"
+              fontSize="22px"
+              cursor="pointer"
+              onClick={() => Router.push("/")}
+            >
+              R KHOIR
+            </Heading>
+          </Box>
 
-        <Box position="relative" zIndex="99">
-          <Button bgColor="white" onClick={cycleOpen}>
-            {open ? <HiOutlineX size="28" /> : <HiMenu size="28" />}
-          </Button>
-        </Box>
-      </Flex>
+          <Box position="relative" zIndex="99">
+            <Button bgColor="white" onClick={cycleOpen}>
+              {open ? <HiOutlineX size="28" /> : <HiMenu size="28" />}
+            </Button>
+          </Box>
+        </Flex>
+      </Box>
+
       <AnimatePresence>
         {open && (
           <Box
@@ -101,7 +121,7 @@ const Navbar = () => {
             h="100%"
             w="100%"
             bg="black"
-            zIndex="9"
+            zIndex="2"
             top="0"
             left="0"
             bgColor="black"
@@ -125,14 +145,14 @@ const Navbar = () => {
                 color: "white",
               }}
             >
-              {data.map(({ name, id, link }) => (
-                <motion.a
+              {data.map(({ name, id, link: url }) => (
+                <motion.div
                   key={id}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 1.1 }}
                 >
                   <Text
-                    as={motion.text}
+                    as={motion.p}
                     variant={itemVariants}
                     initial="hidden"
                     animate="visible"
@@ -140,15 +160,16 @@ const Navbar = () => {
                     fontWeight="bold"
                     cursor="pointer"
                   >
-                    <Link
+                    <chakra.span
+                      as={Link}
                       onClick={cycleOpen}
-                      to={link}
-                      _hover={{ textDecor: "none" }}
+                      containerId={url}
+                      to={url}
                     >
                       {name}
-                    </Link>
+                    </chakra.span>
                   </Text>
-                </motion.a>
+                </motion.div>
               ))}
             </Box>
           </Box>
