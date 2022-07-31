@@ -13,6 +13,7 @@ import {
   Grid,
   GridItem,
 } from "@chakra-ui/react";
+import { useParallax } from "react-scroll-parallax";
 import {
   ApolloClient,
   createHttpLink,
@@ -68,6 +69,9 @@ const stack = [
 ];
 
 const Home = ({ pinnedItems }) => {
+  const parallax = useParallax({
+    rotate: [0, 360],
+  });
   return (
     <>
       <Head>
@@ -114,11 +118,13 @@ const Home = ({ pinnedItems }) => {
                 </Box>
               </Box>
               <Box display={{ base: "none", md: "flex" }}>
-                <Img
-                  maxW={{ md: "200px", xl: "500px" }}
-                  src="/assets/svg/illustation-about.svg"
-                  alt="About me"
-                />
+                <div ref={parallax.ref}>
+                  <Img
+                    maxW={{ md: "200px", xl: "500px" }}
+                    src="/assets/svg/illustation-about.svg"
+                    alt="About me"
+                  />
+                </div>
               </Box>
             </Box>
           </Box>
