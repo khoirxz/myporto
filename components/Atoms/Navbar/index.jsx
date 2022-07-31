@@ -58,23 +58,24 @@ const Navbar = () => {
   const [open, cycleOpen] = useCycle(false, true);
   const [navbar, setNavbar] = useState(false);
 
+  const changeBgNavbar = () => {
+    if (window.scrollY >= 100) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+    console.log(window.scrollY);
+  };
+
   useEffect(() => {
-    const changeBgNavbar = () => {
-      if (window.screenY >= 80) {
-        setNavbar(true);
-      } else {
-        setNavbar(false);
-      }
-    };
-
-    window.addEventListener("scroll", changeBgNavbar);
-
     if (open) {
       document.body.style.overflowY = "hidden";
     } else {
       document.body.style.overflowY = "auto";
     }
-  }, [open, setNavbar]);
+
+    window.addEventListener("scroll", changeBgNavbar);
+  }, [open]);
 
   return (
     <Box as="nav" position="relative" maxW="1420px" zIndex={9}>
@@ -85,6 +86,8 @@ const Navbar = () => {
         left="50%"
         transform="translate(-50%)"
         zIndex={9}
+        bgColor={navbar && !open ? "white" : "transparent"}
+        shadow={navbar ? "md" : "none"}
       >
         <Flex
           position="relative"
