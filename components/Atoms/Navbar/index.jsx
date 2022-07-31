@@ -64,7 +64,6 @@ const Navbar = () => {
     } else {
       setNavbar(false);
     }
-    console.log(window.scrollY);
   };
 
   useEffect(() => {
@@ -93,7 +92,7 @@ const Navbar = () => {
           position="relative"
           alignItems="center"
           justifyContent="space-between"
-          width={{ base: "80%", md: "65%" }}
+          width={{ base: "80%", lg: "65%" }}
           margin="auto"
         >
           <Box>
@@ -163,14 +162,9 @@ const Navbar = () => {
                     fontWeight="bold"
                     cursor="pointer"
                   >
-                    <chakra.span
-                      as={Link}
-                      onClick={cycleOpen}
-                      containerId={url}
-                      to={url}
-                    >
+                    <Link onClick={cycleOpen} to={url}>
                       {name}
-                    </chakra.span>
+                    </Link>
                   </Text>
                 </motion.div>
               ))}
