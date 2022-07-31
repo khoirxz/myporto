@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Router from "next/router";
-import { Box, Flex, Heading, Button, Text, chakra } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, Text } from "@chakra-ui/react";
 import { Link } from "react-scroll";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 import { HiMenu, HiOutlineX } from "react-icons/hi";

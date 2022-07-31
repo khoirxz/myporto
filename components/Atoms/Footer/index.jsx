@@ -25,13 +25,21 @@ const Footer = () => {
         </Box>
       </Box>
       <Box as="footer" maxW="1420px" margin="auto" width="65%" my={5}>
-        <Flex justifyContent="space-between" alignItems="center">
-          <Box display="flex" alignItems="center">
+        <Flex
+          justifyContent="space-between"
+          alignItems="center"
+          flexDir={{ base: "column", sm: "row" }}
+        >
+          <Box
+            display="flex"
+            alignItems="center"
+            marginBottom={{ base: "1.3rem", sm: 0 }}
+          >
             <chakra.span mr={2}>Made with</chakra.span>
             <FaHeart color="#EA4335" /> <chakra.span ml={2}>Rizqi</chakra.span>
           </Box>
           <Box>
-            <Flex mt={3}>
+            <Flex>
               <NextLink href="https://facebook.com/rootbackdor" passHref>
                 <Link mx={2}>
                   <FaFacebook size="26" />

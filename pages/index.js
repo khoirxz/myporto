@@ -6,7 +6,6 @@ import {
   Heading,
   Box,
   Text,
-  Link,
   Img,
   Flex,
   Button,
@@ -23,7 +22,11 @@ import {
 import { setContext } from "@apollo/client/link/context";
 
 import Layout from "../Layout/Layout";
-import { CustomContainer, ListItem } from "../components/Molecules";
+import {
+  AnimateLink,
+  CustomContainer,
+  ListItem,
+} from "../components/Molecules";
 
 const stack = [
   {
@@ -104,17 +107,14 @@ const Home = ({ pinnedItems }) => {
                 </Box>
 
                 <Box pt="2rem">
-                  <Link
-                    color="blue.500"
-                    _hover={{
-                      textDecoration: "none",
-                    }}
-                    onClick={() => {
-                      Router.push("/resume.pdf");
-                    }}
-                  >
-                    Download CV
-                  </Link>
+                  <Box display="flex">
+                    <AnimateLink
+                      icon={true}
+                      onClick={() => Router.push("/resume.pdf")}
+                    >
+                      Download CV
+                    </AnimateLink>
+                  </Box>
                 </Box>
               </Box>
               <Box display={{ base: "none", md: "flex" }}>
