@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/react";
 import { Footer, Navbar } from "../components/Atoms";
 import { Hero } from "../components/Molecules";
 
-const Layout = ({ children, ...rest }) => {
+const Layout = ({ children, hero, contact, ...rest }) => {
   return (
     <Box
       color="blackAlpha.800"
@@ -16,12 +16,12 @@ const Layout = ({ children, ...rest }) => {
     >
       <Box as="header">
         <Navbar />
-        <Hero />
+        {hero ? <Hero /> : null}
       </Box>
 
       <Box as="main">{children}</Box>
       <Box borderTop="1px solid #E3E3E3">
-        <Footer />
+        <Footer contact={contact} />
       </Box>
     </Box>
   );

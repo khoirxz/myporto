@@ -3,27 +3,30 @@ import NextLink from "next/link";
 import { Box, Flex, Heading, Link, chakra } from "@chakra-ui/react";
 import { FaHeart, FaFacebook, FaGithub, FaInstagram } from "react-icons/fa";
 
-const Footer = () => {
+const Footer = ({ contact }) => {
   return (
     <>
-      <Box maxW="1420px" margin="auto" width="65%" as="footer" id="contact">
-        <Box mt={8} mb="7rem">
-          <Heading fontSize="36px">Get in touch</Heading>
-          <Box>
-            <Link
-              fontSize={{ base: "20px", md: "36px" }}
-              fontWeight="semibold"
-              color="blue.500"
-              _hover={{
-                textDecoration: "none",
-              }}
-              href="mailto:khoirrurrohman@gmail.com"
-            >
-              khoirrurrohman@gmail.com
-            </Link>
+      {contact ? (
+        <Box maxW="1420px" margin="auto" width="65%" as="footer" id="contact">
+          <Box mt={8} mb="7rem">
+            <Heading fontSize="36px">Get in touch</Heading>
+            <Box>
+              <Link
+                fontSize={{ base: "20px", md: "36px" }}
+                fontWeight="semibold"
+                color="blue.500"
+                _hover={{
+                  textDecoration: "none",
+                }}
+                href="mailto:khoirrurrohman@gmail.com"
+              >
+                khoirrurrohman@gmail.com
+              </Link>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      ) : null}
+
       <Box as="footer" maxW="1420px" margin="auto" width="65%" my={5}>
         <Flex
           justifyContent="space-between"
@@ -50,7 +53,7 @@ const Footer = () => {
                   <FaGithub size="26" />
                 </Link>
               </NextLink>
-              <NextLink href="https://facebook.com/rizqi.khoir" passHref>
+              <NextLink href="https://instagram.com/rizqi.khoir" passHref>
                 <Link mx={2}>
                   <FaInstagram size="26" />
                 </Link>

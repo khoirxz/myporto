@@ -1,5 +1,6 @@
 import { Box, Flex, Heading, Img, Link } from "@chakra-ui/react";
 import { FaFacebook, FaGithub, FaInstagram } from "react-icons/fa";
+
 import NextLink from "next/link";
 
 import CustomContainer from "../CustomContainer";
@@ -48,7 +49,7 @@ const Hero = () => {
                   <FaGithub size="26" />
                 </Link>
               </NextLink>
-              <NextLink href="https://facebook.com/rizqi.khoir" passHref>
+              <NextLink href="https://instagram.com/rizqi.khoir" passHref>
                 <Link mx={2}>
                   <FaInstagram size="26" />
                 </Link>
