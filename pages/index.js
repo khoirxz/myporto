@@ -81,6 +81,10 @@ const Home = ({ pinnedItems }) => {
         <title>Rizqi K - Portofolio</title>
         <meta name="title" content="Rizqi Khoirurrohman - Portofolio" />
         <meta name="description" content="Fullstack Developer, Linux " />
+        <meta
+          name="google-site-verification"
+          content="6WLvYlxxJaLTkpSfguBvi_pSeejt7Hhv6jiMIzuDSIw"
+        />
       </Head>
       <Layout hero={true} contact={true}>
         <CustomContainer id="about">
